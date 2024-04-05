@@ -1,0 +1,6 @@
+#Add version to the requirements during development ie. fastapi==current version
+
+
+fastapi
+uvicorn
+pydantic

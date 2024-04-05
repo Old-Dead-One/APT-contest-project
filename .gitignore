@@ -1,0 +1,15 @@
+# .gitignore
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# IDE/Editor
+.vscode/
+
+# .json files of private information
+*.json
+
+
