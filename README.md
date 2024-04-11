@@ -48,10 +48,10 @@ The Golf Event Skins Games Management project aims to develop a web application 
 6. Configure deployment environments for security and performance.
 
 ## Timeline
-- Phase 1: 2 weeks
-- Phase 2: 3 weeks
-- Phase 3: 1 week
-- Phase 4: 1 week
+- Phase 1: 3 weeks
+- Phase 2: 4 weeks
+- Phase 3: 2 week
+- Phase 4: 2 week
 
 ## Resources and Tools
 - Python: Programming language for backend development.
