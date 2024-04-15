@@ -4,10 +4,10 @@
 The Golf Event Skins Games Management project aims to develop a web application for managing skins games in a golf event. The project will use FastAPI for the backend API development and React for the frontend user interface.
 
 ## Goals
-- Allow players to create profiles with unique identifiers (UUIDs) and enter their Venmo IDs.
+- Allow players to create profiles with unique identifiers (UUIDs) and enter their first name, last name, Venmo IDs and eamil address.
 - Provide a list of available contests for players to enter.
 - Display a summary of contests entered by players along with total entrance fees.
-- Enable players to confirm their choices and receive payment information.
+- Enable players to confirm their choices and receive payment instructions.
 
 ## Development Phases
 
