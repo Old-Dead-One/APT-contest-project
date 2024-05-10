@@ -20,11 +20,15 @@ async def get_events(db: Session = Depends(get_db)) -> list[Event]:
 @app.get("/events/chapter/{chapter_id}", response_model=list[Event])
 async def get_events_by_chapter(chapter_id: int, db: Session = Depends(get_db)) -> list[Event]:
     events = db.exec(select(Event).where(Event.chapter_id == chapter_id)).all()
+    if not events:
+        raise HTTPException(status_code=404, detail="No events found for the given chapter")
     return events
 
 @app.get("/contests/event/{event_id}", response_model=list[Contest])
 async def get_contests_by_event(event_id: int, db: Session = Depends(get_db)) -> list[Contest]:
     contests = db.exec(select(Contest).where(Contest.event_id == event_id)).all()
+    if not contests:
+        raise HTTPException(status_code=404, detail="No contests found for the given event")
     return contests
 
 # Profile CRUD operations
@@ -36,6 +40,8 @@ async def get_players(db: Session = Depends(get_db)) -> list[Player]:
 @app.get("/players/chapter/{chapter_id}", response_model=list[Player])
 async def get_players_by_chapter(chapter_id: int, db: Session = Depends(get_db)) -> list[Player]:
     players = db.exec(select(Player).where(Player.chapter_id == chapter_id)).all()
+    if not players:
+        raise HTTPException(status_code=404, detail="No chapter with that player found")
     return players
 
 @app.post("/players/", response_model=Player)
@@ -52,8 +58,9 @@ async def create_player(player: Player, db: Session = Depends(get_db)) -> Player
 
 @app.post("/reset-password/")
 async def reset_password(email: str, new_password: str, token: str, db: Session = Depends(get_db)):
-    player = reset_password(email=email, new_password=new_password, token=token, db=db)
+    reset_password(email=email, new_password=new_password, token=token, db=db)
     return {"message": "Password reset successfully"}
+
 
 @app.post("/forgot-password/")
 async def forgot_password(email: str, db: Session = Depends(get_db)):
