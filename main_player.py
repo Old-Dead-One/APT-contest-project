@@ -6,7 +6,6 @@ from security import validate_password, reset_password, generate_password_reset_
 
 app = FastAPI()
 
-
 # main_player CRUD operations
 
 @app.get("/chapters/", response_model=list[Chapter])
