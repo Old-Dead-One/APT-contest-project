@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from sqlmodel import Session, select
 
 from database import get_db
-from models import Chapter, Event, Contest, Player
+from models import Chapter, Event, Contest, Player, PlayerChapterLink, PlayerEventLink
 
 app = FastAPI()
 
@@ -121,7 +121,7 @@ async def get_players(db: Session = Depends(get_db)) -> list[Player]:
 # Get players by chapter
 @app.get("/players/chapter/{chapter_id}", response_model=list[Player])
 async def get_players_by_chapter(chapter_id: int, db: Session = Depends(get_db)) -> list[Player]:
-    players = db.exec(select(Player).where(Player.chapter_id == chapter_id)).all()
+    players = db.exec(select(Player).where(Player.home_chapter_id == chapter_id)).all()
     return players
 
 @app.post("/players/", response_model=Player)
