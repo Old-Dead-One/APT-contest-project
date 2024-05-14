@@ -140,21 +140,6 @@ async def create_player(player: Player, db: Session = Depends(get_db)) -> Player
     db.commit()
     return player
 
-@app.post("/reset-password/")
-async def reset_password(email: str, new_password: str, token: str, db: Session = Depends(get_db)):
-    reset_password(email=email, new_password=new_password, token=token, db=db)
-    return {"message": "Password reset successfully"}
-
-@app.post("/forgot-password/")
-async def forgot_password(email: str, db: Session = Depends(get_db)):
-    player = db.exec(Player).filter(Player.email == email).first()
-    if player:
-        token = generate_password_reset_token()
-        send_password_reset_email(email, token)
-        return {"message": "Password reset email sent"}
-    else:
-        raise HTTPException(status_code=404, detail="Email not found")
-    
 @app.put("/players/{player_id}", response_model=Player)
 async def update_player(player_id: int, player: Player, db: Session = Depends(get_db)) -> Player:
     db_player = db.get(Player, player_id)
@@ -175,6 +160,21 @@ async def delete_player(player_id: int, db: Session = Depends(get_db)) -> None:
     db.delete(db_player)
     db.commit()
 
+'''@app.post("/reset-password/")
+async def reset_password(email: str, new_password: str, token: str, db: Session = Depends(get_db)):
+    reset_password(email=email, new_password=new_password, token=token, db=db)
+    return {"message": "Password reset successfully"}
+
+@app.post("/forgot-password/")
+async def forgot_password(email: str, db: Session = Depends(get_db)):
+    player = db.exec(Player).filter(Player.email == email).first()
+    if player:
+        token = generate_password_reset_token()
+        send_password_reset_email(email, token)
+        return {"message": "Password reset email sent"}
+    else:
+        raise HTTPException(status_code=404, detail="Email not found")
+    
 @app.get("/player_cart/", response_model=list[PlayerCart])
 async def get_player_cart(db: Session = Depends(get_db)) -> list[PlayerCart]:
     return db.exec(select(PlayerCart)).all()
@@ -204,4 +204,4 @@ async def delete_player_cart(player_id: int, chapter_id: int, event_id: int, con
     if not entry:
         raise HTTPException(status_code=404, detail="Player cart entry not found")
     db.delete(entry)
-    db.commit()
+    db.commit()'''
