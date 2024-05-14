@@ -29,6 +29,7 @@ class Player(SQLModel, table=True):
     last_name: str
     venmo_id: str
     email: str
+    password: str
     home_chapter_id:int = Field(foreign_key="chapter.chapter_id")
     chapter: Chapter = Relationship(back_populates="players")
     player_event_links: list["PlayerEventLink"] = Relationship(back_populates="player")
@@ -55,3 +56,10 @@ class PlayerEventLink(SQLModel, table=True):
     event_id: int = Field(foreign_key="event.event_id", primary_key=True)
     player: "Player" = Relationship(back_populates="player_event_links")
     event: "Event" = Relationship(back_populates="player_event_links")
+
+
+class PlayerCart(SQLModel, table=True):
+    player_id: int = Field(foreign_key="player.player_id", primary_key=True)
+    chapter_id: int = Field(foreign_key="chapter.chapter_id", primary_key=True)
+    event_id: int = Field(foreign_key="event.event_id", primary_key=True)
+    contest_id: int = Field(foreign_key="contest.contest_id", primary_key=True)

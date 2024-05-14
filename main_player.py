@@ -38,7 +38,7 @@ async def get_players(db: Session = Depends(get_db)) -> list[Player]:
 
 @app.get("/players/chapter/{chapter_id}", response_model=list[Player])
 async def get_players_by_chapter(chapter_id: int, db: Session = Depends(get_db)) -> list[Player]:
-    players = db.exec(select(Player).where(Player.chapter_id == chapter_id)).all()
+    players = db.exec(select(Player).where(Player.home_chapter_id == chapter_id)).all()
     if not players:
         raise HTTPException(status_code=404, detail="No chapter with that player found")
     return players
