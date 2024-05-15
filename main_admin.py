@@ -3,10 +3,14 @@ from sqlmodel import Session, select
 
 from database import get_db
 from models import Chapter, Event, Contest, Player, PlayerCart
-from security import validate_password, reset_password, generate_password_reset_token, send_password_reset_email
+#from security import validate_password #reset_password, generate_password_reset_token, send_password_reset_email
 
 
 app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "The server is running"}
 
 # Chapter CRUD operations
 
