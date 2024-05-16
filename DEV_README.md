@@ -1,4 +1,4 @@
-# Golf Event Skins Games Management Project Development Plan
+# Golf Event Skins Games Project Development Plan
 
 ## Overview
 The Golf Event Skins Games Management project aims to develop a web application for managing skins games in a golf event. The project will use FastAPI for the backend API development and React for the frontend user interface.
@@ -10,13 +10,22 @@ The Golf Event Skins Games Management project aims to develop a web application 
 - Display a summary of contests entered by players along with total entrance fees.
 - Enable players to confirm their choices and receive payment instructions.
 
+## Testing/Use
+
+### Instalation
+
+1. Initialize a Python virtual environment.
+2. Clone repo https://github.com/Old-Dead-One/APT-contest-project.git
+3. Install requirements.txt and other required dependencies.
+4. Fill db with needed/relavent data either using existing endpoints sql injection.
+
 ## Development Phases
 
 ### Phase 1: Backend Development with FastAPI
 1. Set up the project directory structure.
 2. Initialize a Python virtual environment.
-3. Install FastAPI and other required dependencies.
-4. Define models for Player (including UUID) and Contest.
+3. Install requirements.txt and other required dependencies.
+4. Define models for Player and Contest.
 5. Implement API endpoints for player management.
 6. Implement API endpoints for contest management.
 7. Add data storage functionality to save player data with UUIDs.
@@ -49,10 +58,10 @@ The Golf Event Skins Games Management project aims to develop a web application 
 6. Configure deployment environments for security and performance.
 
 ## Timeline
-- Phase 1: 3 weeks
-- Phase 2: 4 weeks
-- Phase 3: 2 week
-- Phase 4: 2 week
+- Phase 1: 6 weeks
+- Phase 2: 8 weeks
+- Phase 3: 4 week
+- Phase 4: 4 week
 
 ## Resources and Tools
 - Python: Programming language for backend development.

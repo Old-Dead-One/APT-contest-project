@@ -29,7 +29,6 @@ class Player(SQLModel, table=True):
     last_name: str
     venmo_id: str
     email: str
-    password: str
     home_chapter_id:int = Field(foreign_key="chapter.chapter_id")
     chapter: Chapter = Relationship(back_populates="players")
     player_event_links: list["PlayerEventLink"] = Relationship(back_populates="player")

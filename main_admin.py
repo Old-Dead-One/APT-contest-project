@@ -1,16 +1,9 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlmodel import Session, select
-
 from database import get_db
-from models import Chapter, Event, Contest, Player, PlayerCart
-#from security import validate_password #reset_password, generate_password_reset_token, send_password_reset_email
-
+from models import Chapter, Event, Contest, Player
 
 app = FastAPI()
-
-@app.get("/")
-async def root():
-    return {"message": "The server is running"}
 
 # Chapter CRUD operations
 
@@ -86,6 +79,7 @@ async def delete_event(event_id: int, db: Session = Depends(get_db)) -> None:
 
 # Contest CRUD operations
 
+# Get contest by events
 @app.get("/contests/event/{event_id}", response_model=list[Contest])
 async def get_contests_by_event(event_id: int, db: Session = Depends(get_db)) -> list[Contest]:
     contests = db.exec(select(Contest).where(Contest.event_id == event_id)).all()
@@ -110,7 +104,7 @@ async def update_contest(contest_id: int, contest: Contest, db: Session = Depend
     db.commit()
     return db_contest
 
-@app.delete("/contests/{contest_id}")
+@app.delete("/contests/{contest_id}", response_model=None)
 async def delete_contest(contest_id: int, db: Session = Depends(get_db)) -> None:
     db_contest = db.get(Contest, contest_id)
     if db_contest is None:
@@ -137,9 +131,6 @@ async def create_player(player: Player, db: Session = Depends(get_db)) -> Player
     existing_player = db.exec(select(Player).where(Player.email == player.email)).first()
     if existing_player:
         raise HTTPException(status_code=400, detail="Player already exists")
-    if not validate_password(player.password):
-        raise HTTPException(status_code=400, detail="Password does not meet requirements")
-    player.hash_password()  # Hash the password
     db.add(player)
     db.commit()
     return player
@@ -163,49 +154,3 @@ async def delete_player(player_id: int, db: Session = Depends(get_db)) -> None:
         raise HTTPException(status_code=404, detail="Player not found")
     db.delete(db_player)
     db.commit()
-
-'''@app.post("/reset-password/")
-async def reset_password(email: str, new_password: str, token: str, db: Session = Depends(get_db)):
-    reset_password(email=email, new_password=new_password, token=token, db=db)
-    return {"message": "Password reset successfully"}
-
-@app.post("/forgot-password/")
-async def forgot_password(email: str, db: Session = Depends(get_db)):
-    player = db.exec(Player).filter(Player.email == email).first()
-    if player:
-        token = generate_password_reset_token()
-        send_password_reset_email(email, token)
-        return {"message": "Password reset email sent"}
-    else:
-        raise HTTPException(status_code=404, detail="Email not found")
-    
-@app.get("/player_cart/", response_model=list[PlayerCart])
-async def get_player_cart(db: Session = Depends(get_db)) -> list[PlayerCart]:
-    return db.exec(select(PlayerCart)).all()
-
-@app.post("/player_cart/", response_model=PlayerCart)
-async def create_player_cart(player_cart: PlayerCart, db: Session = Depends(get_db)) -> PlayerCart:
-    existing_entry = db.exec(select(PlayerCart).where(
-        (PlayerCart.player_id == player_cart.player_id) &
-        (PlayerCart.chapter_id == player_cart.chapter_id) &
-        (PlayerCart.event_id == player_cart.event_id) &
-        (PlayerCart.contest_id == player_cart.contest_id)
-    )).first()
-    if existing_entry:
-        raise HTTPException(status_code=400, detail="Player cart entry already exists")
-    db.add(player_cart)
-    db.commit()
-    return player_cart
-
-@app.delete("/player_cart/")
-async def delete_player_cart(player_id: int, chapter_id: int, event_id: int, contest_id: int, db: Session = Depends(get_db)) -> None:
-    entry = db.exec(select(PlayerCart).where(
-        (PlayerCart.player_id == player_id) &
-        (PlayerCart.chapter_id == chapter_id) &
-        (PlayerCart.event_id == event_id) &
-        (PlayerCart.contest_id == contest_id)
-    )).first()
-    if not entry:
-        raise HTTPException(status_code=404, detail="Player cart entry not found")
-    db.delete(entry)
-    db.commit()'''
