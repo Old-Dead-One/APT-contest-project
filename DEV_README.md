@@ -17,7 +17,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 1. Initialize a Python virtual environment.
 2. Clone repo https://github.com/Old-Dead-One/APT-contest-project.git
 3. Install requirements.txt and other required dependencies.
-4. Fill db with needed/relavent data either using existing endpoints sql injection.
+4. Fill db with needed/relavent data either using existing endpoints or sql injection.
 
 ## Development Phases
 
