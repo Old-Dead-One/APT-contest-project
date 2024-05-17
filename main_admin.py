@@ -11,6 +11,11 @@ app = FastAPI()
 async def get_chapters(db: Session = Depends(get_db)) -> list[Chapter]:
     return db.exec(select(Chapter.chapter_id, Chapter.name, Chapter.location)).all()
 
+@app.get("/chapters/{chapter_id}", response_model=list[Chapter])
+async def get_chapter_by_id(chapter_id: int, db: Session = Depends(get_db)) -> list[Chapter]:
+    chapter = db.exec(select(Chapter).where(Chapter.chapter_id == chapter_id)).all()
+    return chapter
+
 @app.post("/chapters/", response_model=Chapter)
 async def create_chapter(chapter: Chapter, db: Session = Depends(get_db)) -> Chapter:
     existing_chapter = db.exec(select(Chapter).where(Chapter.name == chapter.name)).first()
@@ -44,6 +49,11 @@ async def delete_chapter(chapter_id: int, db: Session = Depends(get_db)) -> None
 async def get_events(db: Session = Depends(get_db)) -> list[Event]:
     return db.exec(select(Event)).all()
 
+@app.get("/events/{event_id}", response_model=list[Event])
+async def get_events_by_event_id(event_id: int, db: Session = Depends(get_db)) -> list[Event]:
+    events = db.exec(select(Event).where(Event.event_id == event_id)).all()
+    return events
+
 # Get events by chapter
 @app.get("/events/chapter/{chapter_id}", response_model=list[Event])
 async def get_events_by_chapter(chapter_id: int, db: Session = Depends(get_db)) -> list[Event]:
@@ -66,6 +76,7 @@ async def update_event(event_id: int, event: Event, db: Session = Depends(get_db
         raise HTTPException(status_code=404, detail="Event not found")
     db_event.name = event.name
     db_event.course = event.course
+    db_event.date = event.date
     db.commit()
     return db_event
 
