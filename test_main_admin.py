@@ -108,7 +108,7 @@ def test_get_and_create_contests(db, client):
     contests = response.json()
     assert {"contest_id": 1, "name": "Test Contest", "cost": 20.00, "event_id": 2} in contests
 
-# Test contest endpoints
+# Test post_contest endpoints
 def test_create_contests(db, client):
     contest_data = {"contest_id": 2, "name": "Test Contest2", "cost": 21.00, "event_id": 2}
     create_response = client.post("/contests/", json=contest_data)
@@ -126,3 +126,39 @@ def test_delete_contest(db, client):
     get_response = client.get(f"/contests/event/{contest_id}")
     assert get_response.status_code == 200
 
+# Test post & get player
+def test_get_and_create_player(db, client):
+    player_data = {"player_id": 1, "division": 4, "first_name": "Bo",
+                   "last_name": "Diggidy", "venmo_id": "@bodiggidy",
+                   "email": "bodiggidy@gmial.com", "home_chapter_id": 2}
+    create_response = client.post("/players/", json=player_data)
+    assert create_response.status_code == 200
+    response = client.get("/players/")
+    assert response.status_code == 200
+    events = response.json()
+    assert {"player_id": 1, "division": 4, "first_name": "Bo",
+                   "last_name": "Diggidy", "venmo_id": "@bodiggidy",
+                   "email": "bodiggidy@gmial.com", "home_chapter_id": 2} in events
+    
+# Test post & get player
+def test_create_player(db, client):
+    player_data = {"player_id": 2, "division": 4, "first_name": "Beau",
+                   "last_name": "Diggity", "venmo_id": "@bodiggity",
+                   "email": "bodiggity@gmial.com", "home_chapter_id": 2}
+    create_response = client.post("/players/", json=player_data)
+    assert create_response.status_code == 200
+    response = client.get("/players/")
+    assert response.status_code == 200
+    events = response.json()
+    assert {"player_id": 2, "division": 4, "first_name": "Beau",
+            "last_name": "Diggity", "venmo_id": "@bodiggity",
+            "email": "bodiggity@gmial.com", "home_chapter_id": 2} in events
+
+# Test delete player    
+def test_delete_player(db, client):
+    player_id = 1
+    chapter_id = 2
+    delete_response = client.delete(f"/players/{player_id}")
+    assert delete_response.status_code == 200
+    get_response = client.get(f"/players/chapter/{chapter_id}")
+    assert get_response.status_code == 200
