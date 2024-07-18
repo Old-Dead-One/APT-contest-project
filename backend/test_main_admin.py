@@ -118,6 +118,17 @@ def test_create_contests(db, client):
     contests = response.json()
     assert {"contest_id": 2, "name": "Test Contest2", "cost": 21.00, "event_id": 2} in contests
 
+def test_update_contests(db, client):
+    contest_id = 2
+    event_id = 2
+    update_contest_data = {"name": "Updated Test Contest2", "cost": 20, "event_id": 2}
+    update_response = client.put(f"/contests/{contest_id}", json=update_contest_data)
+    assert update_response.status_code == 200
+    updated_get_response = client.get(f"/contests/event/{event_id}")
+    assert updated_get_response.status_code == 200
+    updated_contest_data = updated_get_response.json()
+    assert {"contest_id": 2, "name": "Updated Test Contest2", "cost": 20, "event_id": 2} in updated_contest_data
+
 # Test delete_contest endpoint
 def test_delete_contest(db, client):
     contest_id = 1
@@ -153,7 +164,7 @@ def test_create_player(db, client):
     assert {"player_id": 2, "division": 4, "first_name": "Beau",
             "last_name": "Diggity", "venmo_id": "@bodiggity",
             "email": "bodiggity@gmial.com", "home_chapter_id": 2} in events
-
+    
 # Test delete player    
 def test_delete_player(db, client):
     player_id = 1
