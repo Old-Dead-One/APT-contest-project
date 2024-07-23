@@ -1,81 +1,60 @@
-// chapterService.js
+const BASE_URL_API = "./main_admin.py";
 
-const API_BASE_URL = "./backend/main_admin";
+interface Chapter {
+  chapter_id: number;
+  name: string;
+  location: string;
+}
 
-export const fetchChapters = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/chapters/`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching chapters:", error);
-    throw error;
+async function fetchChapters(): Promise<Chapter[]> {
+  const response = await fetch(`${BASE_URL_API}/chapters/`);
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
-};
+  return response.json();
+}
 
-export const fetchChapterById = async (chapterId) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/chapters/${chapterId}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching chapter:", error);
-    throw error;
+async function fetchChapterById(chapter_id: number): Promise<Chapter[]> {
+  const response = await fetch(`${BASE_URL_API}/chapters/${chapter_id}`);
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
-};
+  return response.json();
+}
 
-export const createChapter = async (chapter) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/chapters/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(chapter),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error creating chapter:", error);
-    throw error;
+async function createChapter(chapter: Chapter): Promise<Chapter> {
+  const response = await fetch(`${BASE_URL_API}/chapters/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(chapter)
+  });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
-};
+  return response.json();
+}
 
-export const updateChapter = async (chapter) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/chapters/${chapter.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(chapter),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error updating chapter:", error);
-    throw error;
+async function updateChapter(chapter_id: number, chapter: Chapter): Promise<Chapter> {
+  const response = await fetch(`${BASE_URL_API}/chapters/${chapter_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(chapter)
+  });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
-};
+  return response.json();
+}
 
-export const deleteChapter = async (chapterId) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/chapters/${chapterId}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  } catch (error) {
-    console.error("Error deleting chapter:", error);
-    throw error;
+async function deleteChapter(chapter_id: number): Promise<void> {
+  const response = await fetch(`${BASE_URL_API}/chapters/${chapter_id}`, {
+    method: "DELETE"
+  });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
-};
+}
