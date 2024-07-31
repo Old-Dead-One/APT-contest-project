@@ -1,18 +1,17 @@
-
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Header from "../src/components/global/Header"
+import Home from "../src/pages/Home"
 import './App.css'
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <>
-      <header>
-        <h1>APT Side Games</h1>
-      </header>
-      <p>Enter side games for local APT Events</p>
-      <main>
-
-      </main>
-    </>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </div>
   )
 }
 

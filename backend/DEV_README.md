@@ -1,10 +1,12 @@
 # Golf Event Skins Games Project Development Plan
 
 ## Overview
+
 The Golf Event Skins Games Management project aims to develop a web application for managing skins games in a golf event. The project will use FastAPI for the backend API development and React for the frontend user interface.
 
 ## Goals
-- Allow players to create profiles with their first name, last name, @venmo IDs and email address.
+
+- Allow players to create profiles with their first name, last name and email address.
 - Allow players to select the local chapter to enter contests.
 - Provide a list of available contests for players to enter.
 - Display a summary of contests entered by players along with total entrance fees.
@@ -22,6 +24,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 ## Development Phases
 
 ### Phase 1: Backend Development with FastAPI
+
 1. Set up the project directory structure.
 2. Initialize a Python virtual environment.
 3. Install requirements.txt and other required dependencies.
@@ -33,16 +36,18 @@ The Golf Event Skins Games Management project aims to develop a web application 
 9. Test data persistence and API functionality.
 
 ### Phase 2: Frontend Development with React
-1. Set up a new React project using Create React App.
+
+1. Set up a new React project using Vite.
 2. Design and develop React components for user interface elements.
 3. Implement forms for player creation and Venmo ID update.
 4. Create a component to display available contests with checkboxes for selection.
 5. Develop a component to display contest summaries and total entrance fees.
-6. Implement data fetching using Axios to communicate with the backend API.
+6. Implement data fetching to communicate with the backend API.
 7. Style the frontend components using CSS or a CSS framework.
 8. Test frontend components and user interactions.
 
 ### Phase 3: Integration and Testing
+
 1. Integrate the frontend with the backend API endpoints.
 2. Test the integrated application to ensure proper communication between frontend and backend.
 3. Conduct end-to-end testing to verify all features and functionalities.
@@ -50,6 +55,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 5. Iterate on the project based on feedback and make necessary adjustments.
 
 ### Phase 4: Documentation and Deployment
+
 1. Write comprehensive documentation for setting up and running the project.
 2. Document the API endpoints, their parameters, and expected responses.
 3. Provide instructions for interacting with the frontend interface.
@@ -58,12 +64,14 @@ The Golf Event Skins Games Management project aims to develop a web application 
 6. Configure deployment environments for security and performance.
 
 ## Timeline
+
 - Phase 1: 6 weeks
 - Phase 2: 8 weeks
 - Phase 3: 4 week
 - Phase 4: 4 week
 
 ## Resources and Tools
+
 - Python: Programming language for backend development.
 - FastAPI: Web framework for building APIs with Python.
 - React: JavaScript library for building user interfaces.
@@ -73,6 +81,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 - Visual Studio Code or any preferred code editor for development.
 
 ## Team Collaboration
+
 - Use Git branches for feature development and pull requests for code review.
 - Conduct regular team meetings to discuss progress and address any issues.
 - Use project management tools like Trello or Jira for task tracking and prioritization.
@@ -80,26 +89,32 @@ The Golf Event Skins Games Management project aims to develop a web application 
 ## Glossary
 
 ### Player
+
 - Definition: A participant in the golf event who creates a profile with a unique identifier (UUID) and enters their Venmo ID.
 - Used in: Backend and Frontend development.
 
 ### Contest
+
 - Definition: A competition or game within the golf event, which players can enter for a chance to win prizes.
 - Used in: Backend and Frontend development.
 
 ### Backend
+
 - Definition: The server-side portion of the application responsible for processing requests, managing data, and interacting with databases.
 - Used in: Backend development.
 
 ### Frontend
+
 - Definition: The client-side portion of the application responsible for presenting the user interface and interacting with users.
 - Used in: Frontend development.
 
 ### Venmo ID
+
 - Definition: The unique identifier associated with a player's Venmo account, used for receiving payments.
 - Used in: Backend and Frontend development.
 
 ### UUID
+
 - Definition: Universally Unique Identifier, a 128-bit identifier used as a unique identifier for players in the system.
 - Used in: Backend development for uniquely identifying players.
 - Installation: No separate installation required as it's built into Python's standard library.
@@ -107,6 +122,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 # Appendix: Dependencies
 
 ## Backend Dependencies (Python):
+
 - FastAPI: Web framework for building APIs with Python.
   - Used for developing API endpoints for player and contest management.
   - Installation: `pip install fastapi`
@@ -126,6 +142,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
 # Appendix: Dependencies
 
 ## Backend Dependencies (Python):
+
 - FastAPI: Web framework for building APIs with Python.
   - Used for developing API endpoints for player and contest management.
   - Installation: `pip install fastapi`
@@ -143,6 +160,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
   - No separate installation required.
 
 ## Frontend Dependencies (React):
+
 - React: JavaScript library for building user interfaces.
   - Used for developing frontend components and managing application state.
   - Installation: N/A (Included with Create React App)
@@ -169,8 +187,7 @@ The Golf Event Skins Games Management project aims to develop a web application 
   - Repositories: [React Bootstrap GitHub](https://github.com/react-bootstrap/react-bootstrap), [Material-UI GitHub](https://github.com/mui-org/material-ui)
 
 ## Additional Dependency:
+
 - UUID: Universally Unique Identifier, a 128-bit identifier used as a unique identifier for players in the system.
   - Used in: Backend development for uniquely identifying players.
   - Installation: No separate installation required as it's built into Python's standard library.
-
-

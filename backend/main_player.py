@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, select
 from database import get_db
 from models import Chapter, Event, Contest, Player, PlayerCart
 # from security import validate_password, reset_password, generate_password_reset_token, send_password_reset_email
 
 app = FastAPI()
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # main_player CRUD operations
 

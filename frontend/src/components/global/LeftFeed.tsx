@@ -1,11 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
-
 interface LeftFeedProps {
-    chapterID: number;
-    chapterName: string;
-    chapterLocation: string;
+    chapterList: string;
 }
 
 const LeftFeed: React.FC<LeftFeedProps> = (props) => {
@@ -15,8 +12,7 @@ const LeftFeed: React.FC<LeftFeedProps> = (props) => {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <h1>{props.chapterName}</h1>
-                            <p>{props.chapterLocation}</p>
+                            {props.chapterList}
                         </Card.Body>
                     </Card>
                 </Col>

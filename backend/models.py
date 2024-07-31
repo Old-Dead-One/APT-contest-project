@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from datetime import date
-
+ 
 
 class Chapter(SQLModel, table=True):
     chapter_id: int = Field(primary_key=True)
